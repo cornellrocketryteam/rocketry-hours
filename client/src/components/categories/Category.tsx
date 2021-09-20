@@ -21,7 +21,6 @@ export default function Category({ category, refresh }: { category: api.Rocketry
 		} finally {
 			setLoading(false)
 		}
-
 	}
 	return <li>
 		{

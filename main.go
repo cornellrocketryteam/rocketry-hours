@@ -61,6 +61,9 @@ func main() {
 	e.GET("/categories/get", categoriesGet)
 	e.POST("/categories/new", categoriesNew)
 	e.POST("/categories/update", categoriesUpdate)
+	e.POST("/hours/report", hoursReport)
+	e.GET("/hours/get", hoursGet)
+	e.POST("/hours/delete", hoursDelete)
 
 	e.GET("/data/typings", dataTypings)
 

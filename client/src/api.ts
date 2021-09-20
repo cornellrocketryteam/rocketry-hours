@@ -56,6 +56,7 @@ export const POST = async function <T>(endpoint: string, body: Record<string, st
 
 //This only kinda works, use with caution!
 
+
 export interface RocketryAdminAPI_response {
 	status: string;
 	error: string;
@@ -74,4 +75,16 @@ export interface RocketryAdminAPI_user {
 export interface RocketryAdminAPI_category {
 	id: number;
 	name: string;
+}
+export interface RocketryAdminAPI_hour {
+	id: number;
+	hours: number;
+	date: string;
+	categoryId: number;
+	metGoals: number;
+	desc: string;
+}
+export interface RocketryAdminAPI_hoursResponse {
+	hour: RocketryAdminAPI_hour[];
+	categories: RocketryAdminAPI_category[];
 }

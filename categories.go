@@ -16,9 +16,18 @@ func categoriesGet(c echo.Context) error {
 		return c.JSON(http.StatusUnauthorized, unauthorizedErr)
 	}
 
-	rows, err := db.Query("SELECT id, name FROM hour_categories WHERE userId = ?", id)
+	categories, err := getCategories(id)
 	if err != nil {
 		return ise(c, "getting categories", err)
+	}
+
+	return c.JSON(http.StatusOK, response{Status: "ok", Data: categories})
+}
+
+func getCategories(id int) ([]category, error) {
+	rows, err := db.Query("SELECT id, name FROM hour_categories WHERE userId = ?", id)
+	if err != nil {
+		return nil, err
 	}
 
 	defer rows.Close()
@@ -29,12 +38,11 @@ func categoriesGet(c echo.Context) error {
 		cat := category{}
 		err := rows.Scan(&cat.ID, &cat.Name)
 		if err != nil {
-			return ise(c, "getting categories", err)
+			return nil, err
 		}
 		categories = append(categories, cat)
 	}
-
-	return c.JSON(http.StatusOK, response{Status: "ok", Data: categories})
+	return categories, nil
 }
 
 func categoriesNew(c echo.Context) error {

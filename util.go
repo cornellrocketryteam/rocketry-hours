@@ -67,6 +67,8 @@ func dataTypings(c echo.Context) error {
 	converter.Add(response{})
 	converter.Add(user{})
 	converter.Add(category{})
+	converter.Add(hour{})
+	converter.Add(hoursResponse{})
 
 	typings, err := converter.Convert(nil)
 

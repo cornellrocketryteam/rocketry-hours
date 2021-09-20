@@ -22,6 +22,20 @@ type category struct {
 	Name string `json:"name"`
 }
 
+type hour struct {
+	ID          int     `json:"id"`
+	Hours       float64 `json:"hours"`
+	Date        string  `json:"date"`
+	CategoryId  int     `json:"categoryId"`
+	MetGoals    int     `json:"metGoals"`
+	Description string  `json:"desc"`
+}
+
+type hoursResponse struct {
+	Hours      []hour     `json:"hour"`
+	Categories []category `json:"categories"`
+}
+
 var missingParams = response{Status: "error", Error: "Required parameters were missing from the request"}
 var internalServerErr = response{Status: "error", Error: "An internal server error occured while processing your request."}
 var unauthorizedErr = response{Status: "error", Error: "Unauthorized"}
