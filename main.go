@@ -60,6 +60,7 @@ func main() {
 	e.GET("/auth/me", authMe)
 	e.GET("/categories/get", categoriesGet)
 	e.POST("/categories/new", categoriesNew)
+	e.POST("/categories/update", categoriesUpdate)
 
 	e.GET("/data/typings", dataTypings)
 
