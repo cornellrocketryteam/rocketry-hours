@@ -17,11 +17,11 @@ func authLogin(c echo.Context) error {
 	// back to the client
 	ise := func(c echo.Context, context string, err error) error {
 		logError(err, context)
-		return c.Redirect(http.StatusTemporaryRedirect, loginRedirect+"?loginMsg="+url.QueryEscape("An internal server error occured while processing the request"))
+		return c.Redirect(http.StatusSeeOther, loginRedirect+"?loginMsg="+url.QueryEscape("An internal server error occured while processing the request"))
 	}
 
 	flash := func(c echo.Context, msg string) error {
-		return c.Redirect(http.StatusTemporaryRedirect, loginRedirect+"?loginMsg="+url.QueryEscape(msg))
+		return c.Redirect(http.StatusSeeOther, loginRedirect+"?loginMsg="+url.QueryEscape(msg))
 	}
 
 	clientId := c.FormValue("clientId")
@@ -86,7 +86,7 @@ func authLogin(c echo.Context) error {
 	}
 
 	// send the user back to the client
-	return c.Redirect(http.StatusTemporaryRedirect, loginRedirect)
+	return c.Redirect(http.StatusSeeOther, loginRedirect)
 }
 
 func authLogout(c echo.Context) error {
