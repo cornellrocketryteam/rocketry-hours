@@ -9,6 +9,7 @@ export default function Navbar(): JSX.Element {
 	const userData = React.useContext(UserData)
 
 	const [loggingOut, setLoggingOut] = React.useState(false)
+	const [navbarExpanded, setExpanded] = React.useState(false)
 
 	const logOut = async () => {
 		setLoggingOut(true);
@@ -24,9 +25,17 @@ export default function Navbar(): JSX.Element {
 					Cornell Rocketry Team
 				</strong>
 			</div>
+
+			<a role="button" className={navbarExpanded ? "navbar-burger is-active" : "navbar-burger"} aria-label="menu" aria-expanded="false" onClick={() => setExpanded(!navbarExpanded)}>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+				<span aria-hidden="true"></span>
+			</a>
 		</div>
 
-		<div className="navbar-menu">
+
+
+		<div className={navbarExpanded ? "navbar-menu is-active" : "navbar-menu"}>
 			<div className="navbar-start">
 				<Link to="/" className="navbar-item">
 					Hours

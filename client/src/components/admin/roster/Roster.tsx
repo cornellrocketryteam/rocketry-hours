@@ -33,6 +33,7 @@ export default function Roster({ subteams }: { subteams: api.RocketryAdminAPI_su
 					<th>netID</th>
 					<th>Last name</th>
 					<th>First name</th>
+					<th>Total hours</th>
 					<th>Email</th>
 					<th>Subteam</th>
 					<th>Lead status</th>

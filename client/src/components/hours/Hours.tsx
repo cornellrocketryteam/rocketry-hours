@@ -51,6 +51,24 @@ export default function Hours() {
 	return <>
 		<HoursHero thisWeek={thisWeek} />
 		<LoggingForm categories={hours!.categories} refresh={() => setIsLoading(true)} />
+		<hr />
+		<div className="section">
+			<nav className="level">
+				<div className="level-item has-text-centered">
+					<div>
+						<p className="heading">This week</p>
+						<p className="title">{thisWeek.reduce((prev, cv) => prev + cv.hours, 0)} hours</p>
+					</div>
+				</div>
+				<div className="level-item has-text-centered">
+					<div>
+						<p className="heading">This semester</p>
+						<p className="title">{hours!.hour.reduce((prev, cv) => prev + cv.hours, 0)} hours</p>
+					</div>
+				</div>
+			</nav>
+
+		</div>
 		<HoursList hours={hours!.hour.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())} categories={hours!.categories} refresh={() => setIsLoading(true)} />
 	</>
 }

@@ -39,6 +39,7 @@ export default function RosterItem({ member, subteams, refresh }: { member: api.
 		<td>{member.netId}</td>
 		<td>{member.lname}</td>
 		<td>{member.fname}</td>
+		<td>{member.totalHours}</td>
 		<td>{member.email}</td>
 		<td>
 			<div className="select">

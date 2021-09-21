@@ -165,7 +165,7 @@ func adminRoster(c echo.Context) error {
 		return c.JSON(http.StatusUnauthorized, unauthorizedErr)
 	}
 
-	rows, err := db.Query("SELECT id, subteamId, netId, fname, lname, email, userLevel FROM users ORDER BY lname")
+	rows, err := db.Query("SELECT users.id, users.subteamId, users.netId, users.fname, users.lname, users.email, users.userLevel, COALESCE(SUM(hours.hours), 0) AS total_hours FROM users LEFT JOIN hours ON users.id = hours.userId GROUP BY users.id ORDER BY users.lname")
 	if err != nil {
 		return ise(c, "getting roster", err)
 	}
@@ -176,7 +176,34 @@ func adminRoster(c echo.Context) error {
 
 	for rows.Next() {
 		u := rosterItem{}
-		rows.Scan(&u.ID, &u.SubteamID, &u.NetID, &u.FName, &u.LName, &u.Email, &u.UserLevel)
+		rows.Scan(&u.ID, &u.SubteamID, &u.NetID, &u.FName, &u.LName, &u.Email, &u.UserLevel, &u.TotalHours)
+
+		roster = append(roster, u)
+	}
+
+	return c.JSON(http.StatusOK, response{Status: "ok", Data: roster})
+}
+
+func adminShame(c echo.Context) error {
+	isLead, err := isTeamLead(c)
+	if err != nil {
+		return ise(c, "getting lead", err)
+	} else if !isLead {
+		return c.JSON(http.StatusUnauthorized, unauthorizedErr)
+	}
+
+	rows, err := db.Query("SELECT users.fname, users.lname, COALESCE(SUM(hours.hours), 0) AS total_hours FROM users LEFT JOIN hours ON users.id = hours.userId AND hours.date >= DATE_SUB(DATE(NOW()), INTERVAL DAYOFWEEK(NOW())-1 DAY) GROUP BY users.id ORDER BY users.lname")
+	if err != nil {
+		return ise(c, "getting roster", err)
+	}
+
+	defer rows.Close()
+
+	roster := []rosterItem{}
+
+	for rows.Next() {
+		u := rosterItem{}
+		rows.Scan(&u.FName, &u.LName, &u.TotalHours)
 
 		roster = append(roster, u)
 	}

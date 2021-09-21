@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"net/http"
 	"os"
 
@@ -39,8 +38,6 @@ func main() {
 
 	e := echo.New()
 
-	fmt.Println(os.Getenv("SECRET"))
-
 	e.Use(session.Middleware(sessions.NewCookieStore([]byte("secret"))))
 
 	cors_middleware := middleware.CORSWithConfig(middleware.CORSConfig{
@@ -69,6 +66,7 @@ func main() {
 	e.POST("/admin/roster/update", adminRosterUpdate)
 	e.POST("/admin/roster/delete", adminRosterDelete)
 	e.POST("/admin/roster/add", adminRosterAdd)
+	e.GET("/admin/shame", adminShame)
 
 	e.GET("/data/typings", dataTypings)
 

@@ -18,13 +18,14 @@ type user struct {
 }
 
 type rosterItem struct {
-	ID        int    `json:"id"`
-	SubteamID int    `json:"subteamId"`
-	NetID     string `json:"netId"`
-	FName     string `json:"fname"`
-	LName     string `json:"lname"`
-	Email     string `json:"email"`
-	UserLevel int    `json:"userLevel"`
+	ID         int     `json:"id"`
+	SubteamID  int     `json:"subteamId"`
+	NetID      string  `json:"netId"`
+	FName      string  `json:"fname"`
+	LName      string  `json:"lname"`
+	Email      string  `json:"email"`
+	UserLevel  int     `json:"userLevel"`
+	TotalHours float64 `json:"totalHours"`
 }
 
 type category struct {

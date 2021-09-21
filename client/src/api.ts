@@ -101,4 +101,5 @@ export interface RocketryAdminAPI_rosterItem {
 	lname: string;
 	email: string;
 	userLevel: number;
+	totalHours: number;
 }

@@ -2,6 +2,7 @@ import * as React from "react"
 import * as api from "../../api"
 import Hero from "../ui/Hero"
 import Roster from "./roster/Roster"
+import Shaming from "./shaming/Shaming"
 import Subteams from "./subteams/Subteams"
 
 export default function Admin() {
@@ -31,6 +32,7 @@ export default function Admin() {
 				<h1 className="title is-3 pt-4">Roster</h1>
 				<Roster subteams={subteams} />
 				<h1 className="title is-3 pt-4">Hour shaming</h1>
+				<Shaming />
 			</div>
 		</div>
 	</>
