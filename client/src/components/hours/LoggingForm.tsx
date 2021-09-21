@@ -49,7 +49,7 @@ export default function LoggingForm({ categories, refresh }: { categories: api.R
 							<div className="select is-fullwidth">
 								<select value={categoryId} onChange={(e) => setCategoryId(e.target.value)}>
 									<option value={"-1"}>Uncategorized</option>
-									{categories.map((cat, i) => <option value={cat.id + ""}>{cat.name}</option>)}
+									{categories.map((cat, i) => <option value={cat.id + ""} key={i}>{cat.name}</option>)}
 								</select>
 							</div>
 						</div>

@@ -8,6 +8,7 @@ import Hours from './hours/Hours';
 import SignIn from './signin/SignIn';
 import Navbar from './ui/Navbar';
 import Categories from './categories/Categories';
+import Admin from './admin/Admin';
 
 // FIXME: should have default value
 //@ts-expect-error see https://github.com/DefinitelyTyped/DefinitelyTyped/pull/24509#issuecomment-382213106
@@ -61,6 +62,9 @@ export default function App(): JSX.Element {
 				</Route>
 				<Route exact path="/categories">
 					<Categories />
+				</Route>
+				<Route exact path="/admin">
+					<Admin />
 				</Route>
 			</Switch>
 		</Router>

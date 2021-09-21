@@ -37,9 +37,9 @@ export default function Navbar(): JSX.Element {
 				<Link to="/orders" className="navbar-item">
 					Orders
 				</Link>
-				{userData.user.userLevel > 1 && <a className="navbar-item">
+				{userData.user.userLevel > 1 && <Link to="/admin" className="navbar-item">
 					Admin
-				</a>}
+				</Link>}
 			</div>
 
 

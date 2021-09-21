@@ -16,7 +16,6 @@ import (
 )
 
 var db *sql.DB
-var clientId string
 var loginRedirect string
 
 func main() {
@@ -25,7 +24,6 @@ func main() {
 		panic(err)
 	}
 
-	clientId = os.Getenv("CLIENT_ID")
 	loginRedirect = os.Getenv("LOGIN_REDIRECT")
 
 	db, err = sql.Open("mysql", os.Getenv("DSN"))
@@ -64,6 +62,13 @@ func main() {
 	e.POST("/hours/report", hoursReport)
 	e.GET("/hours/get", hoursGet)
 	e.POST("/hours/delete", hoursDelete)
+	e.GET("/admin/subteams", adminSubteams)
+	e.POST("/admin/subteams/new", adminSubteamsNew)
+	e.POST("/admin/subteams/update", adminSubteamsUpdate)
+	e.GET("/admin/roster", adminRoster)
+	e.POST("/admin/roster/update", adminRosterUpdate)
+	e.POST("/admin/roster/delete", adminRosterDelete)
+	e.POST("/admin/roster/add", adminRosterAdd)
 
 	e.GET("/data/typings", dataTypings)
 

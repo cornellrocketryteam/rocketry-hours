@@ -17,7 +17,22 @@ type user struct {
 	UserLevel int    `json:"userLevel"`
 }
 
+type rosterItem struct {
+	ID        int    `json:"id"`
+	SubteamID int    `json:"subteamId"`
+	NetID     string `json:"netId"`
+	FName     string `json:"fname"`
+	LName     string `json:"lname"`
+	Email     string `json:"email"`
+	UserLevel int    `json:"userLevel"`
+}
+
 type category struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
+}
+
+type subteam struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
 }

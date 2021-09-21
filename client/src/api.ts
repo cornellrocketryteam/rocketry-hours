@@ -88,3 +88,17 @@ export interface RocketryAdminAPI_hoursResponse {
 	hour: RocketryAdminAPI_hour[];
 	categories: RocketryAdminAPI_category[];
 }
+export interface RocketryAdminAPI_subteam {
+	id: number;
+	name: string;
+}
+
+export interface RocketryAdminAPI_rosterItem {
+	id: number;
+	subteamId: number;
+	netId: string;
+	fname: string;
+	lname: string;
+	email: string;
+	userLevel: number;
+}
