@@ -70,7 +70,9 @@ func main() {
 
 	e.GET("/data/typings", dataTypings)
 
+	e.AutoTLSManager.TLSConfig()
 	e.Logger.Fatal(e.Start(":3000"))
+	// e.Logger.Fatal(e.StartTLS(":3000", "cert.pem", "key.pem"))
 }
 
 func indexResponse(c echo.Context) error {

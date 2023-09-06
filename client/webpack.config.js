@@ -16,7 +16,8 @@ const config = {
 	devServer: {
 		liveReload: true,
 		port: 3001,
-		historyApiFallback: true
+		historyApiFallback: true,
+		https: true,
 	},
 	plugins: [
 		new CopyPlugin({
