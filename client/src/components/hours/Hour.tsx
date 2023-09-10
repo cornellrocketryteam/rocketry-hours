@@ -40,7 +40,7 @@ export default function HoursList({ hour, categories, refresh }: { hour: api.Roc
 		<h3 className="title is-4 mb-1">
 			<button className="button is-small" onClick={() => setRemove(true)}><FontAwesomeIcon icon={faTrash} fixedWidth /></button>&nbsp;
 			<strong className="has-text-primary">{hour.hours} hours</strong>{" "}
-			on {new Date(hour.date).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}&nbsp;
+			on {new Date(hour.date).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}&nbsp;
 			{hour.categoryId != -1 && <span className="tag">
 				{categories.find((cat) => cat.id == hour.categoryId)?.name}
 			</span>}
