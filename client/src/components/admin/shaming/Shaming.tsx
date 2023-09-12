@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import * as React from "react"
 import * as api from "../../../api"
 
+import "./Shaming.sass"
+
 export default function Shaming() {
 
 	let [roster, setRoster] = React.useState([] as api.RocketryAdminAPI_rosterItem[])
@@ -25,15 +27,15 @@ export default function Shaming() {
 		return <p>Loading!</p>
 	}
 
-	return <div className="shame-grid">
+	return <ul className="shame">
 		{roster.map((person, i) => {
 			let hasLoggedHours = person.totalHours > 0
-			return <div className="shame-box" key={i}>
+			return <li>
 				<strong className={hasLoggedHours ? "has-text-success" : "has-text-primary"}>
-					<FontAwesomeIcon fixedWidth icon={hasLoggedHours ? faCheckCircle : faTimesCircle} />
+					<FontAwesomeIcon fixedWidth icon={hasLoggedHours ? faCheckCircle : faTimesCircle} />&nbsp;
 					{person.lname}, {person.fname}
 				</strong>
-			</div>
+			</li>
 		})}
-	</div>
+	</ul>
 }
