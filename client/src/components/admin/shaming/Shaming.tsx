@@ -40,22 +40,23 @@ export default function Shaming({ subteams }: { subteams: api.RocketryAdminAPI_s
 
 	return <ul className="shame">
 		{subteams.map((subteam, i) => {
-			return <>
-				<li key={i}><strong>{subteams.find(s => s.id == subteam.id)?.name}</strong></li>
-				{
-					sortedRoster[subteam.id].map((person, i) => {
-						const hasLoggedHours = person.totalHours > 0
-						return <li key={i}>
-							<span className={hasLoggedHours ? "has-text-success" : "has-text-danger"}>
-								<FontAwesomeIcon fixedWidth icon={hasLoggedHours ? faCheckCircle : faTimesCircle} />&nbsp;
-							</span>
-							<span className={hasLoggedHours ? "" : "has-text-weight-bold has-text-danger"}>
-								{person.lname}, {person.fname}
-							</span>
-						</li>
-					})
-				}
-			</>
+			return <li key={i} className="subteam"><strong>{subteams.find(s => s.id == subteam.id)?.name}</strong>
+				<ul>
+					{
+						sortedRoster[subteam.id].map((person, i) => {
+							const hasLoggedHours = person.totalHours > 0
+							return <li key={i}>
+								<span className={hasLoggedHours ? "has-text-success" : "has-text-danger"}>
+									<FontAwesomeIcon fixedWidth icon={hasLoggedHours ? faCheckCircle : faTimesCircle} />&nbsp;
+								</span>
+								<span className={hasLoggedHours ? "" : "has-text-weight-bold has-text-danger"}>
+									{person.lname}, {person.fname}
+								</span>
+							</li>
+						})
+					}
+				</ul>
+			</li>
 		})}
 	</ul>
 }
