@@ -32,7 +32,7 @@ export default function Admin() {
 				<h1 className="title is-3 pt-4">Roster</h1>
 				<Roster subteams={subteams} />
 				<h1 className="title is-3 pt-4">Hour report</h1>
-				<Shaming />
+				<Shaming subteams={subteams} />
 			</div>
 		</div>
 	</>

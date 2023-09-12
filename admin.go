@@ -192,7 +192,7 @@ func adminShame(c echo.Context) error {
 		return c.JSON(http.StatusUnauthorized, unauthorizedErr)
 	}
 
-	rows, err := db.Query("SELECT users.fname, users.lname, COALESCE(SUM(hours.hours), 0) AS total_hours FROM users LEFT JOIN hours ON users.id = hours.userId AND hours.date BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND DATE_SUB(CURDATE(), INTERVAL 1 DAY) GROUP BY users.id ORDER BY users.lname")
+	rows, err := db.Query("SELECT users.fname, users.lname, COALESCE(SUM(hours.hours), 0) AS total_hours, users.subteamId FROM users LEFT JOIN hours ON users.id = hours.userId AND hours.date BETWEEN DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND DATE_SUB(CURDATE(), INTERVAL 1 DAY) GROUP BY users.id ORDER BY users.lname")
 	if err != nil {
 		return ise(c, "getting roster", err)
 	}
@@ -203,7 +203,7 @@ func adminShame(c echo.Context) error {
 
 	for rows.Next() {
 		u := rosterItem{}
-		rows.Scan(&u.FName, &u.LName, &u.TotalHours)
+		rows.Scan(&u.FName, &u.LName, &u.TotalHours, &u.SubteamID)
 
 		roster = append(roster, u)
 	}
