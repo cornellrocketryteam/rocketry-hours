@@ -4,6 +4,8 @@ import Hero from "../ui/Hero"
 import Shaming from "./shaming/Shaming"
 import ReviewModal from "./reviewModal/ReviewModal"
 
+import "./Review.sass"
+
 export default function Review() {
 
 	let [users, setUsers] = React.useState([] as api.RocketryAdminAPI_rosterItem[])
@@ -41,22 +43,22 @@ export default function Review() {
 
 	return <>
 		{currentReview != 0 && <ReviewModal onClose={() => setCurrentReview(0)} userId={currentReview} />}
-		<Hero title="Review" subtitle="See hours submitted by subteam members!" />
+		<Hero title="Hour Report" subtitle="View hours submitted this week" />
 		{subteamsLoading ? <p>Loading</p> : <div className="section">
-			<div className="container">
-				<h1 className="title is-3 pt-4">Hour report</h1>
-				<div className="shame-section">
-					<Shaming subteams={subteams} />
+			<div className="container Review">
+				<div className="block">
+					<h1 className="title is-3 pt-4">Hour report</h1>
+					<div className="shame-section">
+						<Shaming subteams={subteams} />
+					</div>
+				</div>
+				<div className="block">
+					<h1 className="title is-3">Review Hours</h1>
+					<ul className="review-columns">
+						{users.sort((a, b) => a.lname.localeCompare(b.lname)).map((user, i) => <li key={i}><a onClick={() => setCurrentReview(user.id)}>{user.lname}, {user.fname}</a></li>)}
+					</ul>
 				</div>
 			</div>
 		</div>}
-		<div className="section">
-			<div className="container">
-				<h1 className="title is-3">Review Hours</h1>
-				<ul>
-					{users.sort((a, b) => a.subteamId - b.subteamId).map((user, i) => <li key={i}><a onClick={() => setCurrentReview(user.id)}>{user.lname}, {user.fname}</a></li>)}
-				</ul>
-			</div>
-		</div>
 	</>
 }
