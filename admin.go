@@ -48,7 +48,7 @@ func isSubteamLead(c echo.Context) (bool, error) {
 }
 
 func adminSubteams(c echo.Context) error {
-	isLead, err := isTeamLead(c)
+	isLead, err := isSubteamLead(c)
 	if err != nil {
 		return ise(c, "getting lead", err)
 	} else if !isLead {
