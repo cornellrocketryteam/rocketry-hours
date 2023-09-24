@@ -59,6 +59,7 @@ func main() {
 	e.POST("/hours/report", hoursReport)
 	e.GET("/hours/get", hoursGet)
 	e.POST("/hours/delete", hoursDelete)
+	e.GET("/hours/review", hoursReview)
 	e.GET("/admin/subteams", adminSubteams)
 	e.POST("/admin/subteams/new", adminSubteamsNew)
 	e.POST("/admin/subteams/update", adminSubteamsUpdate)

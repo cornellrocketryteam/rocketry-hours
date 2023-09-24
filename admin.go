@@ -27,6 +27,26 @@ func isTeamLead(c echo.Context) (bool, error) {
 	return false, nil
 }
 
+func isSubteamLead(c echo.Context) (bool, error) {
+	id, err := getUserID(c)
+	if err != nil {
+		return false, err
+	}
+	if id < 1 {
+		return false, nil
+	}
+
+	userInfo, err := getUserInfo(id)
+	if err != nil {
+		return false, err
+	}
+	if userInfo.UserLevel > 0 {
+		return true, nil
+	}
+
+	return false, nil
+}
+
 func adminSubteams(c echo.Context) error {
 	isLead, err := isTeamLead(c)
 	if err != nil {

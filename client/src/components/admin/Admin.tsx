@@ -2,7 +2,7 @@ import * as React from "react"
 import * as api from "../../api"
 import Hero from "../ui/Hero"
 import Roster from "./roster/Roster"
-import Shaming from "./shaming/Shaming"
+import Shaming from "../review/shaming/Shaming"
 import Subteams from "./subteams/Subteams"
 
 export default function Admin() {

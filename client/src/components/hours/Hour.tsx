@@ -4,7 +4,7 @@ import * as React from "react"
 import * as api from "../../api"
 import ModalCard from "../ui/ModalCard"
 
-export default function HoursList({ hour, categories, refresh }: { hour: api.RocketryAdminAPI_hour, categories: api.RocketryAdminAPI_category[], refresh(): void }) {
+export default function Hour({ hour, categories, refresh, noEdit }: { noEdit?: boolean, hour: api.RocketryAdminAPI_hour, categories: api.RocketryAdminAPI_category[], refresh(): void }) {
 	const [remove, setRemove] = React.useState(false)
 	const [loading, setLoading] = React.useState(false)
 	const [error, setError] = React.useState("")
@@ -38,7 +38,7 @@ export default function HoursList({ hour, categories, refresh }: { hour: api.Roc
 			</ModalCard>
 		}
 		<h3 className="title is-4 mb-1">
-			<button className="button is-small" onClick={() => setRemove(true)}><FontAwesomeIcon icon={faTrash} fixedWidth /></button>&nbsp;
+			{!noEdit && <><button className="button is-small" onClick={() => setRemove(true)}><FontAwesomeIcon icon={faTrash} fixedWidth /></button>&nbsp;</>}
 			<strong className="has-text-primary">{hour.hours} hours</strong>{" "}
 			on {new Date(hour.date).toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}&nbsp;
 			{hour.categoryId != -1 && <span className="tag">

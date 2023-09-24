@@ -91,6 +91,7 @@ func hoursDelete(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, okResp)
 }
+
 func hoursGet(c echo.Context) error {
 	id, err := getUserID(c)
 	if err != nil {
@@ -98,6 +99,43 @@ func hoursGet(c echo.Context) error {
 	}
 	if id < 1 {
 		return c.JSON(http.StatusUnauthorized, unauthorizedErr)
+	}
+
+	rows, err := db.Query("SELECT id, hours, date, categoryId, metGoals, description FROM hours WHERE userId = ?", id)
+	if err != nil {
+		return ise(c, "getting hours", err)
+	}
+	defer rows.Close()
+
+	hours := []hour{}
+
+	for rows.Next() {
+		h := hour{}
+		rows.Scan(&h.ID, &h.Hours, &h.Date, &h.CategoryId, &h.MetGoals, &h.Description)
+		hours = append(hours, h)
+	}
+
+	categories, err := getCategories(id)
+	if err != nil {
+		return ise(c, "getting categories", err)
+	}
+
+	return c.JSON(http.StatusOK, response{Status: "ok", Data: hoursResponse{Hours: hours, Categories: categories}})
+}
+
+func hoursReview(c echo.Context) error {
+	subteamLead, err := isSubteamLead(c)
+	if err != nil {
+		return ise(c, "getting user id", err)
+	}
+	if !subteamLead {
+		return c.JSON(http.StatusUnauthorized, unauthorizedErr)
+	}
+
+	idStr := c.QueryParam("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, missingParams)
 	}
 
 	rows, err := db.Query("SELECT id, hours, date, categoryId, metGoals, description FROM hours WHERE userId = ?", id)

@@ -43,6 +43,9 @@ export default function Navbar(): JSX.Element {
 				<Link to="/categories" className="navbar-item">
 					Categories
 				</Link>
+				{userData.user.userLevel > 0 && <Link to="/review" className="navbar-item">
+					Review
+				</Link>}
 				{userData.user.userLevel > 1 && <Link to="/admin" className="navbar-item">
 					Admin
 				</Link>}
