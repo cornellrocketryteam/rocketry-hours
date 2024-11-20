@@ -24,92 +24,52 @@ CORS=clientLocation
 
 The `DSN` (Data Source Name) explains how the server should connect to the database. It can be in a variety of formats, but the most common is `username:password@server/database`, where `username` and `password` are the MySQL user's username and password, `server` is the location of the server, and `database` is the name of the database.
 
-You also need configure the database. This SQL script will do that for you (I should include this in a better place than the README, but it's here for now):
+You also need configure the database. This SQL script will do that for you (I should include this in a better place than the README, but it's here for now). Go to the Cloudflare D1 Console tab for the database and paste this script in:
 
 <details>
 <summary>Show SQL script</summary>
 
 ```sql
--- -------------------------------------------------------------
--- TablePlus 4.5.2(402)
---
--- https://tableplus.com/
---
--- Database: rocketryadmin
--- Generation Time: 2022-05-09 12:20:06.0090
--- -------------------------------------------------------------
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
 DROP TABLE IF EXISTS `hour_categories`;
-CREATE TABLE `hour_categories` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `userId` int DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE hour_categories (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  userId INTEGER,
+  name TEXT
+);
 
 DROP TABLE IF EXISTS `hours`;
-CREATE TABLE `hours` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `userId` int DEFAULT NULL,
-  `hours` float DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  `categoryId` int DEFAULT NULL,
-  `metGoals` int DEFAULT NULL,
-  `description` text,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE hours (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  userId INTEGER,
+  hours REAL,
+  date TEXT,
+  categoryId INTEGER,
+  metGoals INTEGER,
+  description TEXT
+);
 
 DROP TABLE IF EXISTS `orders`;
-CREATE TABLE `orders` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE orders (
+  id INTEGER PRIMARY KEY AUTOINCREMENT
+);
 
 DROP TABLE IF EXISTS `subteams`;
-CREATE TABLE `subteams` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE subteams (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT
+);
 
 DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `netId` varchar(8) DEFAULT NULL,
-  `fname` varchar(255) DEFAULT NULL,
-  `lname` varchar(255) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `picture` varchar(255) DEFAULT NULL,
-  `userLevel` int DEFAULT NULL,
-  `subteamId` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+CREATE TABLE users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  netId TEXT,
+  fname TEXT,
+  lname TEXT,
+  email TEXT,
+  picture TEXT,
+  userLevel INTEGER,
+  subteamId INTEGER
+);
 ```
 
 </details>
