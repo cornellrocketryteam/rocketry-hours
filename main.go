@@ -24,7 +24,7 @@ func main() {
 
 	loginRedirect = os.Getenv("LOGIN_REDIRECT")
 
-	db, err = sql.Open("mysql", os.Getenv("DSN"))
+	db, err := sql.Open("mysql", os.Getenv("DSN"))
 	if err != nil {
 		panic(err)
 	}

@@ -8,6 +8,8 @@ The source code for the client is located in the [`client`](./client) directory,
 ## Server
 The server is implemented in the [Go Programming Language](https://go.dev). If you haven't ever written Go before, I'd recommend completing [_A Tour of Go_](https://go.dev/tour). It teaches the fundamentals of Go very well.
 
+The server can be built with `go build` in the repository's root directory. This will create a rocketry-hours binary that you can run with `./rocketry-hours` in the repository's root directory.
+
 The server uses a [MySQL database](https://www.mysql.com/). There are many tutorials online that explain how to configure MySQL online.
 
 The server gets it's configuration information from a `.env` file. It should be in the following format:
