@@ -24,10 +24,17 @@ func main() {
 
 	loginRedirect = os.Getenv("LOGIN_REDIRECT")
 
-	db, err := sql.Open("mysql", os.Getenv("DSN"))
-	if err != nil {
-		panic(err)
+	dsn := os.Getenv("my_d1_database")
+	if dsn == "" {
+		return
 	}
+
+	// Now you have the proper connection string
+	db, err := sql.Open("sqlite3", dsn)
+	if err != nil {
+		return
+	}
+	defer db.Close()
 
 	err = db.Ping()
 	if err != nil {
