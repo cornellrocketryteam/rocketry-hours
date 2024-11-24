@@ -1,0 +1,14 @@
+name = "rocketry-hours" # Your Pages project name
+compatibility_date = "2024-11-23" # Keep this up-to-date!
+account_id = "{{ env.CF_ACCOUNT_ID }}"
+
+[build]
+command = "go build -o ./functions/[[path]]/main ./functions/[[path]]/main.go"
+
+[build.upload]
+format = "functions" # Necessary for Pages functions
+main = "./functions/[[path]]/main"  # Correct main for functions build
+
+[d1_databases] # D1 binding (essential for secure connections)
+binding = "my_d1_database"  # Choose a binding name
+database_name = "<your-d1-database-name>"

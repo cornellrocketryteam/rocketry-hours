@@ -1,0 +1,10 @@
+name = "my-rocketry-worker"
+compatibility_date = "2023-11-29"
+account_id = "{{ secrets.CF_ACCOUNT_ID }}"  # Or use environment variables
+
+[build]
+command = "go build -o ./main"  # Build your main Go file
+
+[build.upload]
+format = "service-worker"  # For Workers
+main = "./main"            # The compiled Go binary
