@@ -72,7 +72,8 @@ func main() {
 	e.GET("/data/typings", dataTypings)
 
 	e.AutoTLSManager.TLSConfig()
-	e.Logger.Fatal(e.Start(":3000"))
+	e.Logger.Fatal(e.StartTLS(":443", "/home/ec2-user/.acme.sh/beta-hours-api.cornellrocketryteam.com_ecc/fullchain.cer", "/home/ec2-user/.acme.sh/beta-hours-api.cornellrocketryteam.com_ecc/beta-hours-api.cornellrocketryteam.com.key"))
+	// e.Logger.Fatal(e.Start(":443"))
 	// e.Logger.Fatal(e.StartTLS(":3000", "cert.pem", "key.pem"))
 }
 
