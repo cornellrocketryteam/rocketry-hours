@@ -39,22 +39,22 @@ func authLogin(c echo.Context) error {
 
 	email, ok := payload.Claims["email"].(string)
 	if !ok {
-		return ise(c, "parsing claims", nil)
+		return ise(c, "parsing claims (email)", nil)
 	}
 
 	fname, ok := payload.Claims["given_name"].(string)
 	if !ok {
-		return ise(c, "parsing claims", nil)
+		return ise(c, "parsing claims (given_name)", nil)
 	}
 
 	lname, ok := payload.Claims["family_name"].(string)
 	if !ok {
-		return ise(c, "parsing claims", nil)
+		return ise(c, "parsing claims (family_name)", nil)
 	}
 
 	picture, ok := payload.Claims["picture"].(string)
 	if !ok {
-		return ise(c, "parsing claims", nil)
+		return ise(c, "parsing claims (picture)", nil)
 	}
 
 	netId := strings.Split(email, "@")[0]
