@@ -52,10 +52,8 @@ func authLogin(c echo.Context) error {
 		return ise(c, "parsing claims (family_name)", nil)
 	}
 
-	picture, ok := payload.Claims["picture"].(string)
-	if !ok {
-		return ise(c, "parsing claims (picture)", nil)
-	}
+	picture, _ := payload.Claims["picture"].(string)
+	// for some reason, we don't get picture information back for some users. Weird...
 
 	netId := strings.Split(email, "@")[0]
 
